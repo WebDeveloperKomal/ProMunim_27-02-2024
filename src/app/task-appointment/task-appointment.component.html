@@ -1,0 +1,585 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <i class="ace-icon fa fa-home home-icon " style="margin-right: 10px;"></i><a href="#">Home</a>
+                    </li>
+
+                    <li class="breadcrumb-item active" aria-current="page">Tasks & Appointments</li>
+                </ol>
+            </nav>
+            <div class="container ">
+                <div class="row">
+                    <div class="col">
+                        <div class="page-header">
+                            <h1>
+                                Tasks & Appointments
+                            </h1>
+                        </div>
+                       
+
+
+                        
+            <div id="progress" class="modal fade" style="text-align: center; margin-top:300px;"><img
+              src="resources/static/img/loading.gif" alt="Smiley face" height="70" width="70"></div>
+
+      <div class="row">
+          <div id="viewCalendar">
+             
+
+              <div class="btn-toolbar">
+                  <div class="btn-group">
+                      <button type="button" class="btn btn-default active" [class.active]="activeTab === 'tab1'"><a (click)="changeTab('tab1')" >
+                          Month</a>
+                      </button>
+                      <button type="button" class="btn btn-default" [class.active]="activeTab === 'tab2'"><a (click)="changeTab('tab2')" >
+                          Week
+                          </a>
+                      </button>
+                      <button type="button" class="btn btn-default" [class.active]="activeTab === 'tab3'"><a (click)="changeTab('tab3')" >
+                          Day</a>
+                      </button>
+                  </div>
+                  <div class="btn-group">
+                      <button type="button" class="btn btn-default" ng-disabled="isToday()" [class.active]="activeTab === 'tab4'"><a (click)="changeTab('tab4')" 
+                          disabled="disabled">
+                          Today</a>
+                      </button>
+                  </div>
+                  <div class="btn-group">
+                      <button type="button" routerLink="/set/add-task" class="btn btn-default" [class.active]="activeTab === 'tab5'"><a (click)="changeTab('tab5')" >
+                          Add Task</a>
+                      </button>
+                  </div>
+              </div>
+
+
+
+
+              <div class="tab-content">
+                <div class="tab-pane active" [class.active]="activeTab === 'tab1'" id="tab1">
+               
+                 <div class="well well-sm">
+                  <div ng-switch="calendarMode" ng-model="currentDate" calendar-mode="mode"
+                      event-source="eventSource" range-changed="reloadSource(startTime, endTime)"
+                      event-selected="onEventSelected(event)" time-selected="onTimeSelected(selectedTime, events)"
+                      step="30" class="ng-isolate-scope ng-valid ng-valid-date">
+                      <div class="row calendar-navbar">
+                          <div class="nav-left col-xs-2">
+                              <button type="button" class="btn btn-default btn-sm" ng-click="move(-1)"><i
+                                      class="glyphicon glyphicon-chevron-left"></i></button>
+                          </div>
+                          <div class="calendar-header col-xs-8 ng-binding">September 2023</div>
+                          <div class="nav-right col-xs-2">
+                              <button type="button" class="btn btn-default btn-sm" ng-click="move(1)"><i
+                                      class="glyphicon glyphicon-chevron-right"></i></button>
+                          </div>
+                      </div>
+                      
+                      <div ng-switch-when="month">
+                          <table class="table table-bordered table-fixed monthview-datetable monthview-datetable">
+                              <thead>
+                                  <tr>
+                                      <th ng-show="showWeeks" class="calendar-week-column text-center ng-hide">#
+                                      </th>
+                                      
+                                      <th ng-repeat="label in labels track by $index"
+                                          class="text-center ng-scope">
+                                          <small class="ng-binding">Sun</small>
+                                      </th>
+                                      <th ng-repeat="label in labels track by $index"
+                                          class="text-center ng-scope">
+                                          <small class="ng-binding">Mon</small>
+                                      </th>
+                                      <th ng-repeat="label in labels track by $index"
+                                          class="text-center ng-scope">
+                                          <small class="ng-binding">Tue</small>
+                                      </th>
+                                      <th ng-repeat="label in labels track by $index"
+                                          class="text-center ng-scope">
+                                          <small class="ng-binding">Wed</small>
+                                      </th>
+                                      <th ng-repeat="label in labels track by $index"
+                                          class="text-center ng-scope">
+                                          <small class="ng-binding">Thu</small>
+                                      </th>
+                                      <th ng-repeat="label in labels track by $index"
+                                          class="text-center ng-scope">
+                                          <small class="ng-binding">Fri</small>
+                                      </th>
+                                      <th ng-repeat="label in labels track by $index"
+                                          class="text-center ng-scope">
+                                          <small class="ng-binding">Sat</small>
+                                      </th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                 
+                                  <tr ng-repeat="row in rows track by $index" class="ng-scope">
+                                      <td ng-show="showWeeks" class="calendar-week-column text-center ng-hide">
+                                          <small><em class="ng-binding"></em></small>
+                                      </td>
+                                     
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}"
+                                              class="ng-binding text-muted">
+                                              27
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}"
+                                              class="ng-binding text-muted">
+                                              28
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}"
+                                              class="ng-binding text-muted">
+                                              29
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}"
+                                              class="ng-binding text-muted">
+                                              30
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}"
+                                              class="ng-binding text-muted">
+                                              31
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              01
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              02
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr ng-repeat="row in rows track by $index" class="ng-scope">
+                                      <td ng-show="showWeeks" class="calendar-week-column text-center ng-hide">
+                                          <small><em class="ng-binding"></em></small>
+                                      </td>
+                                    
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              03
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              04
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              05
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              06
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center monthview-selected"
+                                          ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              07
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              08
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              09
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr ng-repeat="row in rows track by $index" class="ng-scope">
+                                      <td ng-show="showWeeks" class="calendar-week-column text-center ng-hide">
+                                          <small><em class="ng-binding"></em></small>
+                                      </td>
+                                     
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              10
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              11
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              12
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              13
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              14
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              15
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              16
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr ng-repeat="row in rows track by $index" class="ng-scope">
+                                      <td ng-show="showWeeks" class="calendar-week-column text-center ng-hide">
+                                          <small><em class="ng-binding"></em></small>
+                                      </td>
+                                     
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              17
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              18
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              19
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              20
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              21
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              22
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              23
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr ng-repeat="row in rows track by $index" class="ng-scope">
+                                      <td ng-show="showWeeks" class="calendar-week-column text-center ng-hide">
+                                          <small><em class="ng-binding"></em></small>
+                                      </td>
+                                     
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              24
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              25
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              26
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              27
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              28
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              29
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}" class="ng-binding">
+                                              30
+                                          </div>
+                                      </td>
+                                  </tr>
+                                  <tr ng-repeat="row in rows track by $index" class="ng-scope">
+                                      <td ng-show="showWeeks" class="calendar-week-column text-center ng-hide">
+                                          <small><em class="ng-binding"></em></small>
+                                      </td>
+                                     
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}"
+                                              class="ng-binding text-muted">
+                                              01
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}"
+                                              class="ng-binding text-muted">
+                                              02
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}"
+                                              class="ng-binding text-muted">
+                                              03
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}"
+                                              class="ng-binding text-muted">
+                                              04
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}"
+                                              class="ng-binding text-muted">
+                                              05
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}"
+                                              class="ng-binding text-muted">
+                                              06
+                                          </div>
+                                      </td>
+                                      <td ng-repeat="dt in row track by dt.date"
+                                          class="monthview-dateCell ng-scope text-center" ng-click="select(dt)"
+                                          ng-class="{'text-center':true, 'monthview-current': dt.current&amp;&amp;!dt.selected&amp;&amp;!dt.hasEvent,'monthview-secondary-with-event': dt.secondary&amp;&amp;dt.hasEvent, 'monthview-primary-with-event':!dt.secondary&amp;&amp;dt.hasEvent&amp;&amp;!dt.selected, 'monthview-selected': dt.selected}">
+                                          <div ng-class="{'text-muted':dt.secondary}"
+                                              class="ng-binding text-muted">
+                                              07
+                                          </div>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                         
+                          <div ng-if="showEventDetail" class="event-detail-container ng-scope">
+                              <div class="scrollable" style="height: 200px">
+                                  <table class="table table-bordered table-striped table-fixed">
+                                      <tbody>
+                                          <tr ng-if="!selectedDate.events" class="ng-scope">
+                                              <td class="no-event-label ng-binding">No Events</td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+             </div>
+
+
+<!-- 
+              <div class="tab-pane" [class.active]="activeTab === 'tab5'" id="tab5"  >
+                <div id="addNewTask">
+                  <button type="button" ng-click="openCalendar()" class="btn btn-info" style="float: right;">View
+                      Calendar</button>
+
+                  <form
+                      class="form-horizontal col-md-12 col-sm-12 col-xs-12 ng-pristine ng-invalid ng-invalid-required"
+                      method="post" style="padding-top: 20px;">
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="form-group">
+                              <label for="idate" class="col-sm-4 control-label">Task Date: *</label>
+                              <div class="col-sm-8">
+                                  <input type="date" id="taskDate"
+                                      class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required"
+                                      ng-model="task.taskDate" required="">
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="form-group">
+                              <label for="idate" class="col-sm-4 control-label">Due Date: *</label>
+                              <div class="col-sm-8">
+                                  <input type="date" id="dueDate"
+                                      class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required"
+                                      ng-model="task.dueDate" required="">
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="form-group">
+                              <label class="col-sm-4 control-label">Description*
+                              </label>
+                              <div class="col-sm-8">
+                                  <textarea rows="4"
+                                      class="form-control col-md-10 col-xs-12 ng-pristine ng-untouched ng-valid"
+                                      id="description" ng-model="task.description"></textarea>
+                              </div>
+                          </div>
+                      </div>
+                   
+
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="form-group">
+                              <label class="col-sm-4 control-label">Assign To*
+                              </label>
+                              <div class="col-sm-8">
+                                  <select class="form-control select ng-pristine ng-untouched ng-valid"
+                                      ng-model="task.employeeId">
+                                      <option value="" selected="selected">-- SELF --</option>
+                                     
+                                  </select>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="form-group">
+                              <label class="col-sm-4 control-label">Type
+                              </label>
+                              <div class="col-sm-8">
+                                  <select class="form-control select ng-pristine ng-untouched ng-valid"
+                                      ng-model="task.type">
+                                      <option value="TASK">TASK</option>
+                                      <option value="APPOINTMENT">APPOINTMENT</option>
+                                  </select>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="clearfix form-actions col-md-12 col-sm-12 col-xs-12">
+                          <div class="col-md-offset-3 col-md-9">
+                              <input type="submit" class="btn btn-info" ng-click="saveTask()">
+                              &nbsp; &nbsp; &nbsp;
+                              <button class="btn" type="reset">
+                                  Reset
+                              </button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+
+              </div> -->
+
+
+
+
+
+
+
+              </div>
+
+          </div>
+
+         
+      </div>
+  
+
+
+                      
