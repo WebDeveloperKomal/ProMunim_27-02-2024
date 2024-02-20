@@ -20,7 +20,7 @@ export class SidenavComponent {
  ismyaccountDropdown : boolean= false ;
  showSideNav : boolean =false;
  sidenavWidth: string = '230px'; 
- togglewidth : string = '442px'
+ togglewidth : string = '422px'
  toggleSubmenu : string = '0px';
  sidenavCollapsed: boolean = false;
  constructor(private sharedService: SidenavtoggleService,private router:Router,private el: ElementRef, private renderer: Renderer2) {
@@ -40,7 +40,7 @@ export class SidenavComponent {
  }
  toggleSidenav() {
    this.sidenavWidth = this.sidenavWidth === '45px' ? '230px' : '45px';
-   this.togglewidth = this.togglewidth === '80px' ? '442px' : '80px';
+   this.togglewidth = this.togglewidth === '47px' ? '422px' : '47px';
    this.toggleSubmenu = this.toggleSubmenu === '230px' ? '0px' : '230px'
    this.sidenavCollapsed = !this.sidenavCollapsed;
    this.closeAllDropdowns();

@@ -1,17 +1,27 @@
-<div class="sidenav">
+<!-- <div class="sidenav"> -->
   <!-- <div class="sidenav"> -->
-    <svg width="18" [ngClass]="{'app-sidenav-nav-open': sidenavStatus}" [style.width]="togglewidth"
+    <!-- <svg width="18" [ngClass]="{'app-sidenav-nav-open': sidenavStatus}" [style.width]="togglewidth"
       (click)="toggleSidenav()" height="18" viewBox="0 0 18 18" id="togglebutton" fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <circle cx="9" cy="9" r="9" transform="matrix(-1 0 0 1 18 0)" fill="#004C8C" />
       <path
         d="M11.1709 5.11397C9.64421 6.51386 8.11561 7.91203 6.54762 9.34975C7.88866 10.5777 9.20345 11.7781 10.5164 12.9785C10.8615 13.2932 11.2178 13.5976 11.5423 13.9312C11.8724 14.27 11.833 14.724 11.4879 15.0198C11.1578 15.3036 10.702 15.3019 10.3344 15.0129C10.2313 14.9321 10.1375 14.8392 10.04 14.7498C8.53387 13.3688 7.02965 11.9879 5.52355 10.6086C4.62515 9.78485 4.61952 8.91637 5.51417 8.09605C6.95275 6.77355 8.39507 5.45277 9.83552 4.13199C9.99682 3.98409 10.1525 3.82931 10.3232 3.69173C10.7058 3.38217 11.1766 3.38733 11.5104 3.69517C11.8443 4.00301 11.8518 4.43639 11.5235 4.78722C11.4148 4.90244 11.2891 5.00563 11.1709 5.11397Z"
         fill="white" />
-    </svg>
-    <div class="border-right" id="sidebar-wrapper">
-      <div class="list-group list-group-flush" [style.width]="sidenavWidth">
-        <div class="list-unstyled components dropdown">
+    </svg> -->
+    <!-- <div class="border-right" id="sidebar-wrapper"> -->
+      <div class="list-group list-group-flush border-right sidenav" [style.width]="sidenavWidth" style="background-color:#3BB161; height:100%" >
+        <svg width="20" [ngClass]="{'app-sidenav-nav-open': sidenavStatus}" [style.width]="togglewidth"
+      (click)="toggleSidenav()" height="20" viewBox="0 0 18 18" id="togglebutton" fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <circle cx="9" cy="9" r="9" transform="matrix(-1 0 0 1 18 0)" fill="#004C8C" />
+      <path
+        d="M11.1709 5.11397C9.64421 6.51386 8.11561 7.91203 6.54762 9.34975C7.88866 10.5777 9.20345 11.7781 10.5164 12.9785C10.8615 13.2932 11.2178 13.5976 11.5423 13.9312C11.8724 14.27 11.833 14.724 11.4879 15.0198C11.1578 15.3036 10.702 15.3019 10.3344 15.0129C10.2313 14.9321 10.1375 14.8392 10.04 14.7498C8.53387 13.3688 7.02965 11.9879 5.52355 10.6086C4.62515 9.78485 4.61952 8.91637 5.51417 8.09605C6.95275 6.77355 8.39507 5.45277 9.83552 4.13199C9.99682 3.98409 10.1525 3.82931 10.3232 3.69173C10.7058 3.38217 11.1766 3.38733 11.5104 3.69517C11.8443 4.00301 11.8518 4.43639 11.5235 4.78722C11.4148 4.90244 11.2891 5.00563 11.1709 5.11397Z"
+        fill="white" />
+    </svg>    
+        
+        <div class="list-unstyled components dropdown mt-1">
 
+                
           <button class="dropdown-btn" style="padding-top: 25px;">
             <a routerLink="/set" [ngClass]="{'active': activeLink === '/set'}" (click)="setActiveLink('/set')">
               <svg width="31" height="19" viewBox="0 0 31 19" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -430,7 +440,7 @@
           </button>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
   <!-- </div> -->
-</div>
+<!-- </div> -->
 <!-- </div> -->

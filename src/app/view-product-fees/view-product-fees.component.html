@@ -1,3 +1,5 @@
+<html style="position: relative;margin: 0;min-height: 100%;padding-bottom: 4.74rem;">
+
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb bg-white">
     <svg width="17" height="13" viewBox="0 0 17 13" style="margin-right: 3px;margin-top: 10px; margin-left: 10px" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -8,16 +10,16 @@
       <!-- <i class="fa-solid fa-house-chimney" style="margin-right: 10px; color: black;"></i> -->
       
         
-      <a href="/set/">Home&#160;</a>
+      <a routerLink="/set/">Home&#160;</a>
       <i class="fa-solid fa-chevron-right"></i>
     </li>
-    <li class="fw-bold"><a href="/set/branch">&#160;Settings&#160;</a>
+    <li class="fw-bold"><a routerLink="/set/branch">&#160;Settings&#160;</a>
       <i class="fa-solid fa-chevron-right"></i>
     </li>
-    <li class="fw-bold"><a href="/set/productFees">&#160;Product Fees&#160;</a>
+    <li class="fw-bold"><a routerLink="/set/productFees">&#160;Product Fees&#160;</a>
       <i class="fa-solid fa-chevron-right"></i>
     </li>
-    <li class="active fw-bold" aria-current="page"><a href="/set/view-product-fees/:id" style="color: #3BB161 !important;" >&#160;Update Product Fees</a></li>
+    <li class="active fw-bold" aria-current="page"><a routerLink="/set/view-product-fees/:id" style="color: #3BB161 !important;" >&#160;Update Product Fees</a></li>
   </ol>
 </nav>
 
@@ -93,8 +95,11 @@
         </div>
     </div>
 </div>
-<app-footer style="position:fixed;
-            bottom:0px; width:80%"></app-footer>
+<app-footer style="position: absolute;right: 0;left: 0;bottom: 0;"></app-footer>
+</html>
+
+<!-- <app-footer style="position:fixed;
+            bottom:0px; width:80%"></app-footer> -->
 
 
 

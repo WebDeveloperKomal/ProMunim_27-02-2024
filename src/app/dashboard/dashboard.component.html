@@ -1,3 +1,4 @@
+<html style="position: relative;margin: 0;min-height: 100%;padding-bottom: 4.74rem;">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb bg-white">
       <svg width="17" height="13" viewBox="0 0 17 13" style="margin-right: 3px;margin-top: 10px; margin-left: 10px" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -5,11 +6,11 @@
         <path d="M8.03247 2.62988C8.92505 3.37788 9.80408 4.11389 10.6831 4.85034C11.6709 5.67829 12.6574 6.50757 13.6479 7.33241C13.7387 7.40792 13.7711 7.48521 13.7711 7.60203C13.7676 9.15355 13.7693 10.7051 13.7685 12.2566C13.7685 12.7323 13.5089 12.9984 13.0419 12.9988C11.8505 13.0001 10.6586 12.9993 9.46723 12.9988C9.42136 12.9988 9.37548 12.9944 9.31213 12.9913C9.31213 11.7005 9.31213 10.4177 9.31213 9.1229C8.45626 9.1229 7.61786 9.1229 6.75718 9.1229C6.75718 10.407 6.75718 11.6934 6.75718 12.9913C6.68422 12.9944 6.63354 12.9988 6.58242 12.9988C5.39626 12.9993 4.20965 12.9997 3.02348 12.9988C2.54727 12.9984 2.29169 12.7345 2.29169 12.2455C2.29125 10.6993 2.293 9.1531 2.28907 7.60691C2.28863 7.48343 2.3262 7.40437 2.42057 7.3253C4.24111 5.80443 6.05859 4.27912 7.87694 2.75514C7.925 2.71517 7.97393 2.67697 8.03247 2.62988Z" fill="#004C8C"/>
         </svg>
       <li class="fw-bold" style="font-size: 12px;margin-top: 5px;margin-bottom: 2px;">&#160;&#160;
-       <a href="/set/">Home&#160;</a>
+       <a routerLink="/set/">Home&#160;</a>
         <i class="fa-solid fa-chevron-right"></i>
       </li>
      
-      <li class="active fw-bold" aria-current="page" style="font-size: 12px;margin-top: 5px;margin-bottom: 2px;"><a href="/set/" style="color: #3BB161 !important;" >&#160;Dashboard</a></li>
+      <li class="active fw-bold" aria-current="page" style="font-size: 12px;margin-top: 5px;margin-bottom: 2px;"><a routerLink="/set/" style="color: #3BB161 !important;" >&#160;Dashboard</a></li>
     </ol>
   </nav>
 
@@ -701,5 +702,10 @@
         </div>
     </div>
 
-    <app-footer style="position:fixed;
-            bottom:0px; width:80%"></app-footer>
+</div>
+
+    <app-footer style="position: absolute;right: 0;left: 0;bottom: 0;"></app-footer>
+    
+    </html>
+    <!-- <app-footer style="position:fixed;
+            bottom:0px; width:80%"></app-footer> -->
