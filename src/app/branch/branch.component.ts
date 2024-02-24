@@ -102,31 +102,65 @@ export class BranchComponent {
     this.router.navigate([`/set/view-branch/`+id])
   }
 
-
   applyFilter(): void {
-    if (!this.SearchText) {
-      
-      this.branchList = [...this.branchList];
+    const searchString = this.SearchText.toLowerCase().trim();
+  
+    if (!searchString) {
+      this.branchList = this.branchList; // Assuming you have a copy of the original data
       return;
     }
-    const searchString = this.SearchText.toLowerCase();
+  
     this.branchList = this.branchList.filter((data) =>
       data.branchName.toLowerCase().includes(searchString) ||
       data.branchCode.toLowerCase().includes(searchString) ||
       data.branchCity.toLowerCase().includes(searchString) ||
       data.branchAddress.toLowerCase().includes(searchString) ||
-      (data.branchId !== null && !isNaN(data.branchId) && data.branchId.toString().includes(searchString)) 
-
+      (data.branchId !== null && !isNaN(data.branchId) && data.branchId.toString() === searchString)
     );
+  }
+  
+
+
+//   applyFilter(): void {
+//     const searchString = this.SearchText.toLowerCase();
+//     if (!this.SearchText || searchString.trim() === '' || this.SearchText=="") {
+      
+//       this.branchList = [...this.branchList];
+//       return;
+//     }
+    
+//     this.branchList = this.branchList.filter((data) =>
+//       data.branchName.toLowerCase().includes(searchString) ||
+//       data.branchCode.toLowerCase().includes(searchString) ||
+//       data.branchCity.toLowerCase().includes(searchString) ||
+//       data.branchAddress.toLowerCase().includes(searchString) ||
+//       (data.branchId !== null && !isNaN(data.branchId) && data.branchId.toString().includes(searchString)) 
+//  );
+
   
       
-  }
-  refreshCountries() {
-    this.countries = this.dataarray
-      .map((country, i) => ({id: i + 1, ...country}))
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-  }
+//   }
+
+
   
+  onKeyUp(event: KeyboardEvent): void {
+    // Check if the key released is the backspace key (keyCode 8)
+    if (event.key === 'Backspace') {
+      this.applyFilter() ;
+    }
+  }
+  // refreshCountries() {
+  //   this.countries = this.dataarray
+  //     .map((country, i) => ({id: i + 1, ...country}))
+  //     .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  // }
+  refreshCountries() {
+    this.page = Math.ceil((this.page - 1) * this.pageSize / this.pageSize) + 1;
+    this.countries = this.dataarray
+        .map((country, i) => ({ id: i + 1, ...country }))
+        .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+}
+
 
 
 }

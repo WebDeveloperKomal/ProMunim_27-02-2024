@@ -45,6 +45,8 @@
               <div class="row" >
                 <div class="form-floating col-lg-3 col-md-11 col-11 mb-3 mb-lg-0">
                   <select formControlName="location" class="form-select">
+                    <option value="">Select Location</option>
+                    <!-- <option value=""> ---Select --- </option> -->
                     <option *ngFor="let branch of branches" [value]="branch.branchName">{{ branch.branchName }}
                       </option>
                   </select>
@@ -55,7 +57,7 @@
 
                 <div class="form-floating col-lg-3 col-md-11 col-11 form-group mb-3 mb-lg-0">
                   <select formControlName="maindepartment" class="form-select">
-                    
+                    <option value="">Select Main Department</option>
                       <option *ngFor="let data of mainDeps" [value]="data.mainDepName">{{ data.mainDepName }}
                       </option>
                   </select> 
@@ -65,7 +67,8 @@
                 <div class="form-floating col-lg-3 col-md-11 col-11 form-group mb-3 mb-lg-0">
                  
                     <select formControlName="department" class="form-select">
-                            <option *ngFor="let data of deps" [value]="data.departmentName">{{ data.departmentName }}
+                      <option value="">Select Department</option>    
+                      <option *ngFor="let data of deps" [value]="data.departmentName">{{ data.departmentName }}
                         </option>
                     </select>
                     <label for="department">Select Department :</label>
@@ -136,7 +139,7 @@
           <tbody>
             <tr
               *ngFor="let data of EmployeesList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize,let index = index ">
-              <td>{{index+1}}</td>
+              <td>{{(page - 1) * pageSize + index+1}}</td>
             <td>{{data.empCode}}</td>
             <td>{{data.firstName}} {{data.middleName}} {{data.lastName}}</td>
             <td>{{data.contactNo}}</td>
@@ -482,7 +485,8 @@
                         Update
                       </button>
 
-                      <button class="col-3 col-lg-4 col-xl-4 btn  btn-info" style="border-radius: 2rem;text-align: center;">
+                      <button class="col-3 col-lg-4 col-xl-4 btn  btn-info"
+                       data-bs-dismiss="modal"  style="border-radius: 2rem;text-align: center;">
                         <!-- <i class="ace-icon fa fa-undo bigger-110"></i> -->
                         Close
                       </button>
@@ -506,9 +510,10 @@
         <div class="d-flex justify-content-between p-2 pag">
           <div class="dataTables_info mt-3"  id="branch_datatable_info" role="status"
             aria-live="polite">
-            Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < collectionSize) ? page * pageSize :
-              pageSize}} of {{EmployeesList.length}} entries </div>
+            Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < EmployeesList.length) ? page * pageSize :
+              EmployeesList.length}} of {{EmployeesList.length}} entries </div>
               <ngb-pagination  [collectionSize]="collectionSize" [(page)]="page"
+              [pageSize]="pageSize"
                 aria-label="Default pagination"></ngb-pagination>
 
           </div>

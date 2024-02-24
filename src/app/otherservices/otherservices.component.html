@@ -93,9 +93,10 @@
             <div class="d-flex justify-content-between p-2 pag">
               <div class="dataTables_info mt-3"  id="branch_datatable_info" role="status"
                 aria-live="polite">
-                Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < collectionSize) ? page * pageSize :
-                  pageSize}} of {{servicesList.length}} entries </div>
+                Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < servicesList.length) ? page * pageSize :
+                  servicesList.length}} of {{servicesList.length}} entries </div>
                   <ngb-pagination [collectionSize]="collectionSize" [(page)]="page"
+                  [pageSize]="pageSize"
                     aria-label="Default pagination"></ngb-pagination>
 
               </div>

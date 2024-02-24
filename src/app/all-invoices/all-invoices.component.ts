@@ -88,6 +88,7 @@ ngOnInit(){
   this.apiService.allBranches().subscribe(
     (responce:any)=>{
       this.branches=responce.data;
+      
     },
     (error:any)=>{
       console.error(error);        
@@ -101,6 +102,7 @@ onSubmit(){
   this.apiService.allInvoiceReport(this.invoiceSearch.value).subscribe(
     (responce:any)=>{
       this.AllInvicesList=responce.data;
+      
       console.log('val',responce.data);
     },
     (error:any)=>{

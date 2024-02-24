@@ -42,6 +42,7 @@ ngOnInit(){
   this.api.allCustomer().subscribe(
     ( data: any) => {
       this.allCust=data.data;
+      this.collectionSize = data.data.length;
       console.log('Response successful Customer!',data.data);
       // localStorage.setItem('tid', data.data[0].tId);
       // console.log('tid', data.data[0].tId);

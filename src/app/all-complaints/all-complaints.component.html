@@ -127,46 +127,46 @@
                   <thead>
                     <tr>
                       <th>Sr.No.</th>
-                      <th>Transaction ID</th>
-                      <th>Invoice Id</th>
+                      <th>Ticket ID</th>
+                      <th>Account No</th>
                       <th>Company Name</th>
-                      <th>Transaction Date</th>
-                      <th>Amount</th>
-                      <th>Payment Mode</th>
-                      <th>Description</th>
+                      <th>Subject</th>
+                      <th>Date</th>
+                      <th>Action</th>
+                      <!-- <th>Description</th> -->
                         <!-- <th scope="col" width="10%" class="sorting" tabindex="0" aria-controls="branch_datatable" rowspan="1"
                         colspan="1" aria-label="Branch Address: activate to sort column ascending" style="width: 149px;">
                         Status</th> -->
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- <tr
-                    *ngFor="let data of branchList  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize,let index = index ">
-                    <td>{{index+1}}</td>
-                    <td>{{data.branchId}}</td>
+                    <tr
+                    *ngFor="let data of AllComplaintsList  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize,let index = index ">
+                    <td>{{(page -1) *pageSize + index+1}}</td>
+                    <!-- <td>{{data.branchId}}</td>
                     <td>{{data.branchName}}</td>
                     <td>{{data.branchCode}}</td>
                     <td>{{data.branchCity}}</td>
-                    <td>{{data.branchAddress}}</td>
+                    <td>{{data.branchAddress}}</td> -->
                       <td>
-                        <button class="btn btn-xs" style="font-size: 13px; background-color:#003974!important; color: white;" routerLink="/set/view-branch" >
+                        <!-- <button class="btn btn-xs" style="font-size: 13px; background-color:#003974!important; color: white;" routerLink="/set/view-branch" >
                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                         </button>&nbsp;&nbsp;
                         <button class="btn btn-xs" style=" font-size: 13px; background-color:#DC3545!important; color: white;" (click)="delete()" >
                         
                         <i class="fa-solid fa-trash-can"></i>
-                        </button>
+                        </button> -->
     
                     </td>
-                    </tr> -->
+                    </tr>
                   </tbody>
                 </table>
                 <div class="d-flex justify-content-between p-2 pag">
                   <div class="dataTables_info mt-3"  id="branch_datatable_info" role="status"
                     aria-live="polite">
-                    Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < collectionSize) ? page * pageSize :
-                      pageSize}} of {{AllComplaintsList.length}} entries </div>
-                      <ngb-pagination [pageSize]="25" [collectionSize]="collectionSize" [(page)]="page"
+                    Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < AllComplaintsList.length) ? page * pageSize :
+                      AllComplaintsList.length}} of {{AllComplaintsList.length}} entries </div>
+                      <ngb-pagination  [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
                         aria-label="Default pagination"></ngb-pagination>
     
                   </div>

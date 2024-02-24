@@ -77,7 +77,7 @@
               <tbody>
                 <tr
                 *ngFor="let data of ProductFeeList  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize,let index = index ">
-                <td>{{index+1}}</td>
+                <td>{{ (page-1) * pageSize + index+1}}</td>
                 <td>{{data.productId}}</td>
                 <td>{{data.productName}}</td>
                 <td>{{data.minValue}} - {{data.maxValue}}</td>
@@ -100,9 +100,10 @@
             <div class="d-flex justify-content-between p-2 pag">
               <div class="dataTables_info mt-3"  id="branch_datatable_info" role="status"
                 aria-live="polite">
-                Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < collectionSize) ? page * pageSize :
-                  pageSize}} of {{ProductFeeList.length}} entries </div>
+                Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < ProductFeeList.length) ? page * pageSize :
+                  ProductFeeList.length}} of {{ProductFeeList.length}} entries </div>
                   <ngb-pagination [pageSize]="25" [collectionSize]="collectionSize" [(page)]="page"
+                  [pageSize]="pageSize"
                     aria-label="Default pagination"></ngb-pagination>
 
               </div>

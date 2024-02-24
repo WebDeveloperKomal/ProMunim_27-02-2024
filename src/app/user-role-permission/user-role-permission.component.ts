@@ -19,10 +19,13 @@ export class UserRolePermissionComponent {
   addUserRoleForm !: FormGroup;
   SearchText : any ;
   page = 1;
+  page1 = 1;
   pageSize = 10 ;
+  pageSize1 = 10 ;
   dataarray: UserRolePermissionModel[] = [];
   currentPage: number = 1;
   countries: UserRolePermissionModel[] | undefined;
+  countries1: EmployeeModel[] | undefined;
   collectionSize =100;
   activeTab: string = 'tab1';
   showdata1 : boolean = true;
@@ -273,6 +276,13 @@ export class UserRolePermissionComponent {
   }
   refreshCountries() {
     this.countries = this.RolesList
+      .map((country, i) => ({id: i + 1, ...country}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+
+  
+  refreshCountries1() {
+    this.countries1 = this.allEmployees
       .map((country, i) => ({id: i + 1, ...country}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }

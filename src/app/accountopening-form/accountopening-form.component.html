@@ -73,49 +73,50 @@
 
         <section class="content">
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12  m-2">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <!--------------form start---------------- -->
                     <div class="x_content">
                         <!-- <div class="container"> -->
-                            <div class="row">
-                                <div id="wizard" class="form_wizard wizard_horizontal">
-                                    <ul class="wizard_steps text-center">
-                                        <li [class.active]="activeTab === 'tab1'" class="centered-step "><a
+                            <div class="row wizard_horizontal">
+                                <!-- <div id="wizard" class="form_wizard wizard_horizontal "> -->
+                                    <!-- <ul class="wizard_steps text-center"> -->
+                                        <!-- <li [class.active]="activeTab === 'tab1'" class="centered-step "><a
                                                 (click)="changeTab('tab1')"> <span class="step_no"
                                                     style="font-size: 12px; margin-left: -20px;">Step <p
                                                         style="margin-top: -25px; font-size: 14px;">1</p></span>
-                                                <span class="step_descr" style="margin-left: -30%;  "> <small
+                                                <span class="step_descr" style="margin-left: -110%;"> <small
                                                         style="top: 10%; font-size: 9px;">
-                                                        Details of Organization/Individual</small></span>
+                                                        Organization/Individual</small></span>
                                             </a></li>
+                                            Details of 
 
                                         <li [class.active]="activeTab === 'tab2'"><a (click)="changeTab('tab2')"> <span
                                                     class="step_no" style="font-size: 12px; margin-left: -30px;">Step <p
                                                         style="margin-top: -25px;">2</p></span>
-                                                <span class="step_descr"> <small>
-                                                        Authorised Signatory Details</small>
+                                                <span class="step_descr" style="margin-left: -110%;"><small style="top: 10%; font-size: 9px;" >
+                                                        Authorised Signatory </small>
                                                 </span>
                                             </a></li>
-
+                                            Details
                                         <li [class.active]="activeTab === 'tab3'"><a (click)="changeTab('tab3')"> <span
                                                     class="step_no" style="font-size: 12px; margin-left: -40px;">Step <p
                                                         style="margin-top: -25px;">3</p></span>
-                                                <span class="step_descr"> <small>
-                                                        Occupation and Income Details</small>
+                                                <span class="step_descr" style="margin-left: -110%;"> <small style="top: 10%; font-size: 9px;">
+                                                        Occupation and Income </small>
                                                 </span>
                                             </a></li>
-
+                                            Details
                                         <li [class.active]="activeTab === 'tab4'"><a (click)="changeTab('tab4')"> <span
                                                     class="step_no" style="font-size: 12px; margin-left: -40px;">Step <p
                                                         style="margin-top: -25px;">4</p></span>
-                                                <span class="step_descr"> <small>
+                                                <span class="step_descr" style="margin-left: -110%;"> <small style="top: 10%; font-size: 9px;">
                                                         Documentation Requirement</small></span>
                                             </a></li>
 
                                         <li [class.active]="activeTab === 'tab5'"><a (click)="changeTab('tab5')"> <span
                                                     class="step_no" style="font-size: 12px; margin-left: -40px;">Step <p
                                                         style="margin-top: -25px;">5</p></span>
-                                                <span class="step_descr"> <small>
+                                                <span class="step_descr" style="margin-left: -140%;"> <small style="top: 10%; font-size: 9px;">
                                                         Company Use</small></span>
                                             </a></li>
 
@@ -123,14 +124,87 @@
                                         <li [class.active]="activeTab === 'tab6'"><a (click)="changeTab('tab6')"><span
                                                     class="step_no" style="font-size: 12px; margin-left: 0px;">Step <p
                                                         style="margin-top: -25px;">6</p></span>
-                                                <span class="step_descr"> <small>
+                                                <span class="step_descr" style="margin-left: -40%;"> <small style="top: 10%; font-size: 9px;">
+                                                        Payment Details</small>
+                                                </span>
+                                            </a></li> -->
+
+                                    <!-- </ul>  -->
+
+                                    <ul class="wizard_steps text-center step-list" >
+                                        <li [class.active]="activeTab === 'tab1'" class="centered-step"><a
+                                                (click)="changeTab('tab1')"> <span class="step_no"
+                                                    style="font-size: 12px; ">Step <p
+                                                        style="margin-top: -25px;">1</p></span>
+                                                <span class="step_descr" ><small> Details of Organization/Individual
+                                                </small>
+                                                </span>
+                                            </a></li>
+                                            <!-- Details of  -->
+
+                                        <li [class.active]="activeTab === 'tab2'" class="centered-step"> <a (click)="changeTab('tab2')"> <span
+                                                    class="step_no" style="font-size: 12px; ">Step <p
+                                                        style="margin-top: -25px;">2</p></span>
+                                                <span class="step_descr" ><small >
+                                                    Details  Authorised Signatory </small>
+                                                </span>
+                                            </a></li>
+                                            <!-- Details -->
+                                        <li [class.active]="activeTab === 'tab3'"><a (click)="changeTab('tab3')"> <span
+                                                    class="step_no" style="font-size: 12px; ">Step <p
+                                                        style="margin-top: -25px;">3</p></span>
+                                                <span class="step_descr" > <small >
+                                                    Details  Occupation and Income </small>
+                                                </span>
+                                            </a></li>
+                                            <!-- Details -->
+                                        <li [class.active]="activeTab === 'tab4'"><a (click)="changeTab('tab4')"> <span
+                                                    class="step_no" style="font-size: 12px; ">Step <p
+                                                        style="margin-top: -25px;">4</p></span>
+                                                <span class="step_descr" > <small >
+                                                        Documentation Requirement</small></span>
+                                            </a></li>
+
+                                        <li [class.active]="activeTab === 'tab5'"><a (click)="changeTab('tab5')"> <span
+                                                    class="step_no" style="font-size: 12px; ">Step <p
+                                                        style="margin-top: -25px;">5</p></span>
+                                                <span class="step_descr " > <small >
+                                                        Company Use</small></span>
+                                            </a></li>
+
+
+                                        <li [class.active]="activeTab === 'tab6'"><a (click)="changeTab('tab6')"><span
+                                                    class="step_no" style="font-size: 12px;">Step <p
+                                                        style="margin-top: -25px;">6</p></span>
+                                                <span class="step_descr" > <small>
                                                         Payment Details</small>
                                                 </span>
                                             </a></li>
 
-                                    </ul>
+                                    </ul> 
+                                    <!-- <ul class="step-list">
+                                        <li [class.active]="activeTab === 'tab1'" class="centered-step">
+                                            <a (click)="changeTab('tab1')">
+                                                <span class="step_no">Step <p>1</p></span>
+                                                <span class="step_descr">
+                                                    <small>Details of Organization/Individual</small>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li [class.active]="activeTab === 'tab2'" class="centered-step">
+                                            <a (click)="changeTab('tab2')">
+                                                <span class="step_no">Step <p>2</p></span>
+                                                <span class="step_descr">
+                                                    <small>Authorised Signatory Details</small>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul> -->
+                                    
 
-                                </div>
+
+                                <!-- </div> -->
                             </div>
 
                             <div class="x_content">

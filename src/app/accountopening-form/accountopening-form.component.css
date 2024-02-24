@@ -143,11 +143,11 @@ label{
 }
 
 .wizard_horizontal ul.wizard_steps li a, .wizard_horizontal ul.wizard_steps {
-    display: block;
+    /* display: block; */
     position: relative;
  
-    opacity: 1;
-    color: #004C8C;
+    /* opacity: 1; */
+    /* color: #004C8C; */
 }
 
 .wizard_horizontal ul.wizard_steps li a .step_no {
@@ -190,42 +190,56 @@ label{
     align-items: center;
 }
 
-.wizard_horizontal ul.wizard_steps li:first-child a:before {
+/* .wizard_horizontal ul.wizard_steps li:first-child a:before {
     left: 0%;
     background: #004C8C;
-}
+} */
 
 /* .wizard_horizontal ul.wizard_steps li:first-child a:before {
     left: 50%;
     background: #030303;
 } */
 .step_descr{
-    font-size: 14px;
+    font-size: 9px;
     margin-top: -50px;
 }
-.wizard_horizontal ul.wizard_steps li a:before {
+.wizard_horizontal ul.wizard_steps li a:after {
     content: "";
     position: absolute;
     height: 5px;
     background: #3BB161;
     top: 20px;
-    width: 100%;
+    width: 180px;
     z-index: 4;
     left: 10px;
 }
+
+.wizard_horizontal ul.wizard_steps li:last-child a:after {
+    display: none; /* Hide the connecting line for the last step */
+}
+
+/* .centered-step::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -1px; 
+    border-top: 2px solid #000; 
+    width: 20px; 
+} */
 .disabled {
     color: #999;
     background: #030303;
 }
 
-.wizard_horizontal ul.wizard_steps li:last-child a:before {
+/* .wizard_horizontal ul.wizard_steps li:last-child a:before {
     width: 0;
-}
+} */
 
 
 .wizard_horizontal ul.wizard_steps li.active .step_no  {
     background: #004c8c ;
-    color: #fff; /* Set the text color for better visibility */
+    color: #fff; 
 }
 
 label {
@@ -306,4 +320,33 @@ body {
     }
   }
   
-  
+  /* .centered-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+} */
+
+.step-list {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+.centered-step {
+    text-align: center;
+}
+
+.step_no {
+    font-size: 12px;
+}
+
+/* .step_descr {
+    display: block;
+} */
+
+small {
+    display: block;
+    font-size: 9px;
+    margin-top: 5px; 
+}

@@ -26,13 +26,17 @@
               Branch
             </h1>
           </div>
-          <p><input class="w-100 search" type="text" [(ngModel)]="SearchText"
-              (input)="applyFilter()" placeholder="search" aria-controls="branch_datatable">
-              <!-- <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: relative; top : -28px ; right: -90%">
-                <path d="M6.59222 7.21594C4.72692 8.64196 2.25072 8.25756 0.893999 6.59439C-0.397597 5.01336 -0.278206 2.65578 1.17775 1.19256C2.63215 -0.269108 4.97966 -0.40396 6.57981 0.881008C8.24199 2.21558 8.66218 4.69561 7.21863 6.59594C7.72721 7.09969 8.23889 7.605 8.74901 8.11186C8.80638 8.16766 8.86375 8.22346 8.91027 8.28856C9.04206 8.46991 9.02656 8.70241 8.87771 8.85897C8.7211 9.02172 8.47147 9.05272 8.2916 8.90392C8.11329 8.75667 7.95514 8.58461 7.79078 8.42031C7.38919 8.01886 6.98915 7.61585 6.59222 7.21594ZM0.890898 3.97175C0.818022 5.65507 2.20575 7.13224 3.92995 7.20664C5.65259 7.28104 7.13646 5.90308 7.20778 4.1624C7.2791 2.42638 5.90688 0.966259 4.13152 0.893408C2.42128 0.822107 0.968424 2.20163 0.890898 3.97175Z" fill="#3BB161"/>
-                </svg> -->
-                
-          </p>
+          <!-- (input)="applyFilter()" -->
+          <p><input class="w-100 search" type="text" [(ngModel)]="SearchText" 
+               placeholder="search" aria-controls="branch_datatable"
+              (keyup) ="applyFilter()">
+           </p>
+          <!-- <p>
+            <input class="w-100 search" type="text" [(ngModel)]="SearchText" 
+                   placeholder="search" aria-controls="branch_datatable" 
+                   (input)="applyFilter()" >
+          </p> -->
+        
           <p><input *ngIf="insertbranch" type="button" routerLink="/set/add-branch" class="btn btn-info" style="border-radius: 20px; padding: 6px 25px;float: right; margin-left: 10px;" 
             value="Add Branch" >
 
@@ -101,7 +105,8 @@
               <tbody>
                 <tr class="text-center"
                   *ngFor="let data of branchList  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize,let index = index ">
-                  <td>{{index+1}}</td>
+                  <!-- <td>{{index+1}}</td> -->
+                  <td>{{ (page - 1) * pageSize + index + 1 }}</td>
                   <td>{{data.branchId}}</td>
                   <td>{{data.branchName}}</td>
                   <td>{{data.branchCode}}</td>
@@ -124,11 +129,21 @@
               </tbody>
             </table>
             <div class="d-flex justify-content-between p-2 pag">
-              <div class="dataTables_info mt-3" id="branch_datatable_info" role="status"
+              <!-- <div class="dataTables_info mt-3" id="branch_datatable_info" role="status"
                 aria-live="polite">
                 Showing {{(page - 1) * pageSize + 1}} to {{(page * pageSize < collectionSize) ? page * pageSize :
-                  pageSize}} of {{branchList.length}} entries </div>
-                  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page"
+                  pageSize}} of {{branchList.length}} entries </div> -->
+                  <div class="dataTables_info mt-3" id="branch_datatable_info" role="status"
+                aria-live="polite">
+                Showing {{(page - 1) * pageSize + 1}} to 
+                {{ (page * pageSize < branchList.length) ? page * pageSize : branchList.length }} of {{branchList.length}} entries </div>
+                  <!-- <ngb-pagination [collectionSize]="collectionSize" [(page)]="page"   
+                  aria-label="Default pagination"></ngb-pagination> -->
+                  <ngb-pagination
+                  [collectionSize]="collectionSize"
+                  [(page)]="page"
+                  [pageSize]="pageSize"
+                  (pageChange)="refreshCountries()"
                     aria-label="Default pagination"></ngb-pagination>
               </div>
             </div>

@@ -120,4 +120,35 @@ export class ComplianceComponent {
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
   
+  getPages(): number[] {
+    const totalPages = Math.ceil(this.complianceList.length / this.pageSize);
+    const currentPage = this.page;
+    const displayedPages: number[] = [];
+  
+    if (totalPages <= 6) {
+      for (let i = 1; i <= totalPages; i++) {
+        displayedPages.push(i);
+      }
+    } else {
+      displayedPages.push(1, 2, 3);
+      
+      if (currentPage > 4) {
+        displayedPages.push(-1);
+      }
+  
+      for (let i = Math.max(4, currentPage - 1); i <= Math.min(currentPage + 1, totalPages - 3); i++) {
+        displayedPages.push(i);
+      }
+  
+      if (currentPage < totalPages - 3) {
+        displayedPages.push(-1);
+      }
+  
+      displayedPages.push(totalPages - 2, totalPages - 1, totalPages);
+    }
+  
+    return displayedPages;
+  }
+  
+  
 }
