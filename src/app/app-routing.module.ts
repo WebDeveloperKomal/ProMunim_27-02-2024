@@ -70,8 +70,6 @@ import { ViewComplianceComponent } from './view-compliance/view-compliance.compo
 
 
 const routes: Routes = [
-
-
   { path: '', component: LoginComponent, 
     children: [ { path: '', component: LoginComponent },
      

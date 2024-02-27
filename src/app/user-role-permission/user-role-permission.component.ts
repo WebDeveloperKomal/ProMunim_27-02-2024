@@ -78,6 +78,8 @@ export class UserRolePermissionComponent {
   viewRM!:boolean;
   viewbranch!:boolean;
   viewall!:boolean;
+  hierarchyData: string[][] = [];
+
 
   constructor(private formBuilder: FormBuilder, private apiService:ApiService, private service:SecurityService) {
     this.updaterole = this.formBuilder.group({
@@ -135,10 +137,35 @@ export class UserRolePermissionComponent {
       (err:any)=>{console.error(err);
       }
     );
+
+
+    // this.apiService.gethierarchy().subscribe(
+    //   (response : any) => {
+    //     this.hierarchyData = response.data;
+    //   },
+    //   (error : any) => {
+    //     console.error('Error fetching hierarchy:', error);
+    //   }
+    // );
+
+
+    this.apiService.gethierarchy().subscribe(
+      (response : any) => {
+        if (response.status) {
+          // Assuming your response structure is like { "data": "[[\"Super Admin\", \"Super Admin\"],[\"Super Admin\", \"Admin\"]]", "status": true }
+          this.hierarchyData = JSON.parse(response.data);
+        } else {
+          console.error('Error: API returned false status');
+        }
+      },
+      (error : any) => {
+        console.error('Error fetching hierarchy:', error);
+      }
+    );
   }
 
 
-  addPermissionRule(index: number, event: Event): void {
+    addPermissionRule(index: number, event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     // If the checkbox is checked, add the corresponding integer to the array
     // If unchecked, remove it from the array
@@ -385,4 +412,7 @@ shownewrole1(){
   this.showdata2 = !this.showdata2;
   this.showdata3 = !this.showdata3
 }
+
+
+
 }

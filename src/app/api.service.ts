@@ -4,6 +4,9 @@ import{HttpClient} from '@angular/common/http'
   providedIn: 'root'
 })
 export class ApiService {
+  getAppointments(): import("./task-appointment/task-appointment.service").Appointment[] {
+    throw new Error('Method not implemented.');
+  }
   
   // baseUrl="https://clientportal.promunim.com/auth";
   baseUrl="http://localhost:8181/auth";
@@ -369,6 +372,12 @@ export class ApiService {
     {
       return this.http.get(`${this.baseUrl}/role-permission-type/`+id);
     }
+
+    gethierarchy():any
+    {
+      return this.http.get(`${this.baseUrl}/org-hierarchy`);
+    }
+
 
 
 

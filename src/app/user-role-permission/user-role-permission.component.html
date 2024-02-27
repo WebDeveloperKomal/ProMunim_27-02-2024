@@ -2486,6 +2486,63 @@ value="Add New Role" >
 
                       </div>
                     </div>
+
+
+                    <div class="tab-pane active" [class.active]="activeTab === 'tab3'" id="tab3">
+                      <div id="branch_datatable_wrapper" class="dataTables_wrapper no-footer">
+<h4>hierarchy</h4>
+
+<!-- 
+<ul>
+  <li *ngFor="let role of hierarchyData" style="list-style-type: none;border: 2px solid rgb(255, 0, 0);" >
+    {{ role[0] }}
+    <ul *ngIf="role.length > 1" style="list-style-type: none;display: inline-block;
+      margin: 5px; padding-left: 30px;">
+      <li *ngFor="let subRole of role.slice(1)" style="border: 2px solid blue; display: inline-block;">
+        {{ subRole }}
+      </li>
+    </ul>
+  </li>
+</ul> -->
+
+<!-- <ul>
+  <li *ngFor="let role of hierarchyData" style="list-style-type: none; border: 2px solid rgb(255, 0, 0);">
+    {{ role[0] }}
+    <ul *ngIf="role.length > 1" style="list-style-type: none; display: inline-block; margin: 5px; padding-left: 30px;">
+      <li *ngFor="let subRole of role.slice(1)" style="display: inline-block; margin: 5px; "border: 2px solid blue;">
+        {{ subRole }}
+      </li>
+    </ul>
+  </li>
+</ul> -->
+
+<ul>
+  <li *ngFor="let role of hierarchyData" style="list-style-type: none;" >
+    <div>
+      <span class="super-admin">
+         {{ role[0] }}
+      <span class="line"></span>
+      </span>
+    </div>
+    
+    <ul *ngIf="role.length > 1" style="list-style-type: none; display: inline; margin: 5px; ">
+      <li *ngFor="let subRole of role.slice(1)" style="display: inline-block; margin: 5px;border: 2px solid blue;">
+        <span class="sub-role">
+        {{ subRole }}
+        <!-- <span class="line"></span> -->
+        </span>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+                      </div>
+                    </div>  
+
+
+
+
                   </div>
                 </div>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog">

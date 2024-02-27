@@ -65,5 +65,5 @@ body {
     rder-color: rgba(var(--bs-secondary-rgb),var(--bs-border-opacity))!important; */
 }
 
-
+/* @import '../node_module/@syncfusion/ej2-material-theme/styles/material.css' */
 

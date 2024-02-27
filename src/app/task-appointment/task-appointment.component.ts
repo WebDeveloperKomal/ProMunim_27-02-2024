@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TaskAppointmentModel } from './task-appointment.component.model';
 import { FormGroup } from '@angular/forms';
+import { CalendarOptions } from '@fullcalendar/core';
+// import dayGridPlugin from '@fullcalendar/daygrid';
+// import interactionPlugin from '@fullcalendar/interaction';
+import { ApiService } from '../api.service';
+import { Appointment, Service } from './task-appointment.service';
+import { ActionEventArgs, EventSettingsModel, ScheduleComponent } from '@syncfusion/ej2-angular-schedule';
 
 @Component({
   selector: 'app-task-appointment',
@@ -22,80 +28,192 @@ export class TaskAppointmentComponent {
   countries: TaskAppointmentModel[] | undefined;
   collectionSize =100;
   activeTab: string = 'tab1';
-  constructor() {
-  this.dataarray = [
-    {branchid : 'Admin', branchname :'AREA BUSINESS HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 'ABM-STARTUP PORTFOLIO RELATIONSHIP MANAGER', branchname :'AREA BUSINESS HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 'BRANCH MANAGER-ENTERPRISE PORTFOLIO RELATIONSHIP MANAGER', branchname :'AREA BUSINESS HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 'BRANCH OPERATIONS MANAGER', branchname :'AREA BUSINESS HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 'ACCOUNT ACTIVATION OFFICER', branchname :'AREA BUSINESS HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 'ACCOUNT ACTIVATION OFFICER', branchname :'AREA BUSINESS HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 'ACCOUNT ACTIVATION OFFICER', branchname :'AREA BUSINESS HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 'ACCOUNT ACTIVATION OFFICER', branchname :'AREA BUSINESS HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 'ABM-STARTUP PORTFOLIO RELATIONSHIP MANAGER', branchname :'AREA BUSINESS HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 'ABM-STARTUP PORTFOLIO RELATIONSHIP MANAGER', branchname :'AREA BUSINESS HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 'ABM-STARTUP PORTFOLIO RELATIONSHIP MANAGER', branchname :'BRANCH HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 'ABM-STARTUP PORTFOLIO RELATIONSHIP MANAGER', branchname :'BRANCH HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 'ABM-STARTUP PORTFOLIO RELATIONSHIP MANAGER', branchname :'BRANCH HEAD' ,branchcode :'Retail Branch Vertical' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 14, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 15, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 16, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 17, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 18, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  }, {branchid : 1, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 19, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 20, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 21, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 22, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 23, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 24, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 25, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 26, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 27, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 28, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 29, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 30, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 31, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-    {branchid : 32, branchname :'Hadapsar' ,branchcode :'HDR' , branchcity :'PUNE' , branchaddress:'SN. 295, Plot No.13, Opp A M College, Mahadev Nagar , Hadapsar, Pune:411028'  },
-   ]
-}
 
-applyFilter(): void {
-  const searchString = this.SearchText.toLowerCase();
-  const filteredData = [...this.dataarray];
-  this.dataarray = filteredData.filter((data) =>
-    data.branchname.toLowerCase().includes(searchString) ||
-    data.branchcode.toLowerCase().includes(searchString) ||
-    data.branchcity.toLowerCase().includes(searchString) ||
-    data.branchaddress.toLowerCase().includes(searchString)
-  );
-}
-refreshCountries() {
-  this.countries = this.dataarray
-    .map((country, i) => ({id: i + 1, ...country}))
-    .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-}
+// calendarOptions: CalendarOptions = {
+//   initialView: 'dayGridMonth',
+//   plugins: [dayGridPlugin, interactionPlugin],
+//   headerToolbar: {
+//     left: 'prev,next today',
+//     center: 'title',
+//     right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+//   },
+//   selectable: true,
+//   selectMirror: true,
+//   select: this.handleDateSelect.bind(this),
+//   eventClick: this.handleEventClick.bind(this),
+//   events: [
+    
+//   ],
+// };
 
 
-changeTab(tabId: string) {
-  this.activeTab = tabId;
-}
 
-switchTabBasedOnId(id: string) {
-  if (id === 'tab1') {
-    this.activeTab = 'tab1';
-  } else if (id === 'tab2') {
-    this.activeTab = 'tab2';
-  }else if (id === 'tab3') {
-    this.activeTab = 'tab3';
-  }else if (id === 'tab4') {
-    this.activeTab = 'tab4';
-  }else if (id === 'tab5') {
-    this.activeTab = 'tab5';
+// handleDateSelect(selectInfo: any) {
+//   const title = prompt('Please enter a new title for your event');
+//   const calendarApi = selectInfo.view.calendar;
+//   calendarApi.unselect(); 
+
+//   if (title) {
+//     calendarApi.addEvent({
+//       title,
+//       start: selectInfo.startStr,
+//       end: selectInfo.endStr,
+//       allDay: selectInfo.allDay,
+//     });
+//   }
+// }
+
+// handleEventClick(clickInfo: any) {
+//   if (
+//     confirm(
+//       `Are you sure you want to delete the event '${clickInfo.event.title}'`
+//     )
+//   ) {
+//     clickInfo.event.remove();
+//   }
+// }
+
+
+
+
+// appointmentsData: Appointment[];
+
+//   currentDate: Date = new Date(2021, 2, 28);
+
+//   constructor(service: Service) {
+//     this.appointmentsData = service.getAppointments();
+//   }
+
+// views: Array<string> = ['Month', 'Agenda'];
+// public selectedDate: Date = new Date();
+// public isFirst: boolean = true;
+// testData = [
+//   {
+//     Id: '1',
+//     Subject: 'Event 1',
+//     StartTime: new Date(2021, 9, 1),
+//     EndTime: new Date(2021, 9, 1, 23, 0),
+//     Holiday: new Date(2021, 9, 1),
+//     IsAllDay: true,
+//   },
+//   {
+//     Id: '2',
+//     Subject: 'Event 1',
+//     StartTime: new Date(2021, 9, 2),
+//     EndTime: new Date(2021, 9, 2, 23, 0),
+//     Holiday: new Date(2021, 9, 2),
+//     IsAllDay: true,
+//   },
+//   {
+//     Id: '3',
+//     Subject: 'Event 1',
+//     StartTime: new Date(2021, 9, 3),
+//     EndTime: new Date(2021, 9, 3, 23, 0),
+//     Holiday: new Date(2021, 9, 3),
+//     IsAllDay: true,
+//   },
+//   {
+//     Id: '4',
+//     Subject: 'Event 2',
+//     StartTime: new Date(2021, 9, 5),
+//     EndTime: new Date(2021, 9, 5, 23, 0),
+//     Holiday: new Date(2021, 9, 5),
+//     IsAllDay: true,
+//   },
+//   {
+//     Id: '5',
+//     Subject: 'Event 2',
+//     StartTime: new Date(2021, 9, 6),
+//     EndTime: new Date(2021, 9, 6, 23, 0),
+//     Holiday: new Date(2021, 9, 6),
+//     IsAllDay: true,
+//   },
+//   {
+//     Id: '6',
+//     Subject: 'Event 2',
+//     StartTime: new Date(2021, 9, 8),
+//     EndTime: new Date(2021, 9, 8, 23, 0),
+//     Holiday: new Date(2021, 9, 8),
+//     IsAllDay: true,
+//   },
+// ];
+// public eventSettings: EventSettingsModel = {
+//   dataSource: <Object[]>extend([], this.testData, null, true),
+// };
+
+// onDataBinding(args: { result: any[]; }) {
+//   var result = (Object as any)
+//     .values(
+//       args.result.reduce((c, v) => {
+//         let k = v.Subject;
+//         c[k] = c[k] || [];
+//         c[k].push(v);
+//         return c;
+//       }, {})
+//     )
+//     // .reduce((c: string | any[], v: string | any[]) => (v.length > 1 ? c.concat(v) : c), []);
+
+//   console.log(result); //appointments which are duplicated
+//   for (let i = 0; i <= result.length / 2; i += 2) {
+//     args.result.splice(
+//       args.result.findIndex(
+//         (e) =>
+//           e.Id == result[i + 1].Id && e.StartTime == result[i + 1].StartTime
+//       ),
+//       1
+//     ); //to remove second event from schedule datasource
+//     if (this.isFirst) {
+//       args.result.find((e) => e.Id == result[i].Id).EndTime =
+//         result[i + 1].EndTime; //to set event data
+//     }
+//   }
+//   this.isFirst = false;
+// }
+
+// }
+// function extend(arg0: never[], testData: { Id: string; Subject: string; StartTime: Date; EndTime: Date; Holiday: Date; IsAllDay: boolean; }[], arg2: null, arg3: boolean): Object[] {
+//   throw new Error('Function not implemented.');
+// }
+
+
+public selectedDate: Date = new Date(2020, 9, 30);
+  public eventSettings: EventSettingsModel = {
+    dataSource: [
+      {
+        Id: 1,
+        Subject: "Testing Event",
+        StartTime: new Date(2020, 9, 30, 14, 0),
+        EndTime: new Date(2020, 9, 30, 14, 50),
+        RecurrenceRule: "FREQ=WEEKLY;BYDAY=FR;INTERVAL=1;",
+        RecurrenceException: "20201106T130000Z"
+      }
+    ]
+  };
+
+  @ViewChild("schedule", { static: false })
+  public scheduleObj!: ScheduleComponent;
+
+  onPopupOpen(args: { data: any; }) {
+    console.log("popUp args", args.data);
+    console.log("getEvent result", this.scheduleObj.getEvents(args.data));
   }
-  // else if (id === 'tab3') {
-  //   this.activeTab = 'tab3';
-  // }else if (id === 'tab3') {
-  //   this.activeTab = 'tab3';
-  // }
-}
+
+  onActionComplete(args: ActionEventArgs): void {
+    console.log("actionComplete", args.requestType, args);
+
+    switch (args.requestType) {
+      case "viewNavigate":
+      case "dateNavigate":
+        this.scheduleObj.refresh();
+        break;
+      case "toolBarItemRendered":
+        break;
+      default:
+    }
+  }
+
+
+
+
+  
 }
